@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a class="btn btn-primary" href="{{ path('admin_pre-create') }}">Ajouter un exposant</a>
+    <h1>Listes des exposants</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Nom & Prénom</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for admin in admins %}
+            <tr>
+                <td>{{ admin.lastName }} {{ admin.firstName }}</td>
+                <td>{{ admin.email }}</td>
+                <td>
+                    <a href="{{ path('admin_edit', {'id': admin.id}) }}">Modifier</a>
+                    <a href="{{ path('admin_delete', {'id': admin.id}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+{% endblock %}

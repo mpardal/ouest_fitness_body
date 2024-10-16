@@ -1,0 +1,40 @@
+security:
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            provider: app_user_provider
+            form_login:
+                login_path: login
+                check_path: login
+                default_target_path: home  # Redirection par défaut après connexion
+                always_use_default_target_path: false  # Permet la redirection basée sur les rôles
+            logout:
+                path: logout
+                target: home
+
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_USER, ROLE_VOLUNTEER, ROLE_EXHIBITOR]
+        ROLE_VOLUNTEER: [ROLE_USER]
+        ROLE_EXHIBITOR: [ROLE_USER]
+
+    access_control:
+        # Autoriser l'accès aux pages de connexion et de déconnexion
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/logout$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # Restreindre les routes en fonction des rôles
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/volunteer, roles: ROLE_VOLUNTEER }
+        # - { path: ^/exhibitor, roles: ROLE_EXHIBITOR }

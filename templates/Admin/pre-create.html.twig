@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Vérification de l'email avant création</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.email) }}
+    <button type="submit" class="btn btn-primary">Vérifier l'email</button>
+    {{ form_end(form) }}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+{% endblock %}

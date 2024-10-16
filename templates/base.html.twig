@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mon Site{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('build/styles/app.css') }}">
+</head>
+<body class="bg-gray-100">
+
+<header class="bg-white shadow-md">
+    <nav class="container mx-auto p-4 flex justify-between items-center">
+        <div class="text-4xl font-bold text-blue-600">
+            <a href="{{ path('home') }}">Ouest Fitness Body</a>
+        </div>
+        <ul class="flex space-x-4">
+            <li class="relative group">
+                <a href="#" class="text-gray-800 hover:text-blue-600">Le salon 2025</a>
+                <ul class="absolute hidden group-hover:block bg-white shadow-md mt-2 space-y-2 rounded-md p-2">
+                    <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">Infos utiles</a></li>
+                    <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">Réservation logement</a></li>
+                    <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">Les exposants</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-blue-600">Devenir Exposants</a></li>
+                </ul>
+            </li>
+            <li class="relative group">
+                <a href="#" class="text-gray-800 hover:text-blue-600">Activités & Présentations</a>
+                <ul class="absolute hidden group-hover:block bg-white shadow-md mt-2 space-y-2 rounded-md p-2">
+                    <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">Activités sportives</a></li>
+                    <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">Présentations</a></li>
+                </ul>
+            </li>
+            <li><a href="#" class="text-gray-800 hover:text-blue-600">L'équipe Ouest Fitness Body</a></li>
+            <li><a href="#" class="text-gray-800 hover:text-blue-600">Achat billets</a></li>
+            {#{% if is_granted('ROLE_ADMIN') %}#}
+                <li class="relative group">
+                    <a href="#" class="text-gray-800 hover:text-blue-600">Gestion des membres</a>
+                    <ul class="absolute hidden group-hover:block bg-white shadow-md mt-2 space-y-2 rounded-md p-2">
+                        <li><a href="{{ path('admin_index') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">Gestion des administrateurs</a></li>
+                        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">Gestion des bénévoles</a></li>
+                        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">Gestion des exposants</a></li>
+                    </ul>
+                </li>
+            {#{% endif %}
+            {% if is_granted('ROLE_VOLUNTEER') %}#}
+                <li class="relative group">
+                    <a href="#" class="text-gray-800 hover:text-blue-600">Listes et QR codes</a>
+                    <ul class="absolute hidden group-hover:block bg-white shadow-md mt-2 space-y-2 rounded-md p-2">
+                        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">Listes des participants</a></li>
+                        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">Listes des exposants</a></li>
+                        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">Listes des bénévoles</a></li>
+                        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">Accès au scanner</a></li>
+                    </ul>
+                </li>
+            {#{% endif %}
+            {% if is_granted('ROLE_EXHIBITOR') %}#}
+                <a href="#" class="text-gray-800 hover:text-blue-600">Gestions des informations</a>
+            {#{% endif %}#}
+            <li>
+                {#{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}#}
+                <a href="{{ path('login') }}" class="text-gray-800 hover:text-blue-600">Connexion</a>
+                {#{% else %}
+                <a href="{{ path('logout') }}" class="text-gray-800 hover:text-blue-600">Déconnexion</a>
+                {% endif %}#}
+            </li>
+            {#{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}#}
+                <a href="#" class="text-gray-800 hover:text-blue-600">Gestions du compte</a>
+            {#{% endif %}#}
+        </ul>
+    </nav>
+</header>
+
+<main class="container mx-auto p-4">
+    {% block body %}{% endblock %}
+</main>
+
+<footer>
+    <section><div>
+            <img src="#" alt="logo OFB">
+            <p>
+                Salon du fitness 2025
+            </p>
+            <p>
+                DATES : 2025
+            </p>
+            <p>
+                LIEU : Solilab Nantes
+            </p>
+        </div>
+        <div>
+            <a href="#">Nous contacter</a>
+            <a href="#">L'équipe Ouest Fitness Body</a>
+            <a href="#">Devenir exposant</a>
+        </div>
+        <div>
+            <p>RÉSEAUX SOCIAUX</p>
+            <img src="#" alt="logo facebook">
+            <img src="#" alt="logo instagram">
+        </div>
+        <div>
+            <a href="#">Mentions légales</a>
+            <a href="#">Politique de confidentialité</a>
+            <a href="#">CGV</a>
+            <a href="#">Cookies</a>
+        </div>
+    </section>
+    <a href="#">Trouver un hôtel par Booking</a>
+    <p>© 2024 Ouest Fitness Body - Tous droits réservés</p>
+</footer>
+
+<script src="{{ asset('build/app.js') }}"></script>
+</body>
+</html>
